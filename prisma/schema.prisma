@@ -17,7 +17,7 @@ model Course {
   id String @id @default(uuid())
   userId String
   title String @db.Text
-  descrtion String? @db.Text
+  description String? @db.Text
   imageUrl String? @db.Text
   price Float?
   isPublished Boolean @default(false)
