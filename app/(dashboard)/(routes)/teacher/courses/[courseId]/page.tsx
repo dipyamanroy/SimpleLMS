@@ -23,6 +23,13 @@ const CourseIdPage = async ({
         where: { id: params.courseId },
     });
 
+    const categories = await db.category.findMany({
+        orderBy: { 
+            name: "asc",
+        },
+    
+    });
+    
     if (!course) {
         return redirect("/");
     }
