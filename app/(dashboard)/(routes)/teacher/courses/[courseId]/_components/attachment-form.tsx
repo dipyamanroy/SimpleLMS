@@ -93,21 +93,18 @@ export const AttachmentForm = ({
                                     <p className="text-xs line-clamp-1">
                                         {attachment.name}
                                     </p>
-                                    {deletingId === attachment.id && (
-                                        <div>
-                                            <Loader2 className="h-4 w-4 animate-spin"/>
-                                        </div>
-                                    )}
-                                    {deletingId !== attachment.id && (
-                                        <button
-                                            onClick={() => onDelete(attachment.id)}
-                                            className="ml-auto hover:opacity-75 transition"
-                                        >
-                                            <div>
-                                                <X className="h-4 w-4"/>
-                                            </div>
-                                        </button>
-                                    )}                                    
+                                    <div className="ml-auto">
+                                        {deletingId === attachment.id ? (
+                                            <Loader2 className="h-4 w-4 animate-spin" />
+                                        ) : (
+                                            <button
+                                                onClick={() => onDelete(attachment.id)}
+                                                className="hover:opacity-75 transition"
+                                            >
+                                                <X className="h-4 w-4" />
+                                            </button>
+                                        )}
+                                    </div>                                
                                 </div>
                             ))}
                         </div>
