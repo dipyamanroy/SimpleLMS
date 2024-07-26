@@ -22,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import { Pencil, PlusCircle } from "lucide-react";
 import { Course, Chapter } from "@prisma/client";
 import { Input } from "@/components/ui/input";
+import { ChaptersList } from "./chapters-list";
 
 interface ChaptersFormProps {
     initialData: Course & { chapters: Chapter[] };
@@ -117,7 +118,11 @@ export const ChaptersForm = ({
                     !initialData.chapters.length && "text-slate-500 italic"
                 )}>
                     {!initialData.chapters.length && "No chapters"}
-                    {/* TODO: Add a list of chapters*/}
+                    <ChaptersList
+                        onEdit={() => {}}
+                        onReorder={() => {}}
+                        items={initialData.chapters || []}
+                    />
                 </div>
             )}
             {!isCreating && (
