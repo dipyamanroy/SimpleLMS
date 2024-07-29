@@ -22,6 +22,10 @@ export const ChaptersList = ({
         setIsMounted(true);
     }, [])
 
+    if (!isMounted) {
+        return null;
+    }
+
     return (
         <div>
             Chapters List
