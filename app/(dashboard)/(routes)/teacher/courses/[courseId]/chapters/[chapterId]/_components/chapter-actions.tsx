@@ -38,7 +38,6 @@ export const ChapterActions = ({
                 toast.success("Chapter published");
             }
 
-            toast.success(isPublished? "Chapter unpublished" : "Chapter published");
             router.refresh();
         } catch {
             toast.error("Something went wrong");
