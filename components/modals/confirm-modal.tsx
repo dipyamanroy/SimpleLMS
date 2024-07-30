@@ -28,7 +28,7 @@ export const ConfirmModal = ({
             </AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>
-                    <AlertDialogTrigger>Are you sure?</AlertDialogTrigger>
+                    <AlertDialogTitle>Are you sure?</AlertDialogTitle>
                     <AlertDialogDescription>
                         This action cannot be undone.
                     </AlertDialogDescription>
