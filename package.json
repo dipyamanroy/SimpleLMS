@@ -15,6 +15,7 @@
     "@mux/mux-node": "^8.8.0",
     "@mux/mux-player-react": "^2.8.1",
     "@prisma/client": "^5.16.2",
+    "@radix-ui/react-alert-dialog": "^1.1.1",
     "@radix-ui/react-checkbox": "^1.1.1",
     "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-label": "^2.1.0",
