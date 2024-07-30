@@ -63,6 +63,14 @@ export async function PATCH(
                 playback_policy: ['public'],
                 test: false,
             });
+
+            await db.muxData.create({
+                data: {
+                    chapterId: params.chapterId,
+                    assetId: asset.id,
+                    playbackId: asset.playback_ids?.[0]?.id,
+                },
+            })
         }
 
         return NextResponse.json(chapter);
