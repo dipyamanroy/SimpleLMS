@@ -1,7 +1,13 @@
+import Mux from "@mux/mux-node";
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
 import { db } from "@/lib/db";
+
+const { video } = new Mux({
+    tokenId: process.env.MUX_TOKEN_ID,
+    tokenSecret: process.env.MUX_TOKEN_SECRET,
+});
 
 export async function PATCH(
     req: Request,
@@ -36,7 +42,28 @@ export async function PATCH(
             }
         })
 
-        //TODO: Handle video upload
+        if (values.videoUrl) {
+            const existingMuxData = await db.muxData.findFirst({
+                where: {
+                    chapterId: params.chapterId,
+                },
+            });
+
+            if (existingMuxData) {
+                await video.assets.delete(existingMuxData.assetId);
+                await db.muxData.delete({ 
+                    where: {
+                        id: existingMuxData.id,
+                    } 
+                });
+            }
+
+            const asset = await video.assets.create({
+                input: values.videoUrl,
+                playback_policy: ['public'],
+                test: false,
+            });
+        }
 
         return NextResponse.json(chapter);
 
