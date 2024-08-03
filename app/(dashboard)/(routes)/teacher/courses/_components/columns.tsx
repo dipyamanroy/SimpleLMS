@@ -43,6 +43,19 @@ export const columns: ColumnDef<Course>[] = [
                 </Button>
             )
         },
+        cell: ({ row }) => {
+            const price = parseFloat(row.getValue("price") || "0");
+            const formatted = new Intl.NumberFormat("en-us", {
+                style: "currency",
+                currency: "INR",
+            }).format(price);
+
+            return (
+                <div>
+                    {formatted}
+                </div>
+            )
+        }
     },
     {
         accessorKey: "isPublished",
