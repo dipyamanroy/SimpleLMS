@@ -3,6 +3,7 @@ import {
 ColumnDef,
 flexRender,
 getCoreRowModel,
+getPaginationRowModel,
 useReactTable,
 } from "@tanstack/react-table"
 
@@ -21,13 +22,14 @@ data: TData[]
 }
 
 export function DataTable<TData, TValue>({
-columns,
-data,
-}: DataTableProps<TData, TValue>) {
-const table = useReactTable({
-data,
-columns,
-getCoreRowModel: getCoreRowModel(),
+	columns,
+	data,
+	}: DataTableProps<TData, TValue>) {
+		const table = useReactTable({
+		data,
+		columns,
+		getCoreRowModel: getCoreRowModel(),
+		getPaginationRowModel: getPaginationRowModel(),
 })
 return (
 <div className="rounded-md border">
