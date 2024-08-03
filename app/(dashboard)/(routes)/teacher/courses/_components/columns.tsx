@@ -12,6 +12,8 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
 export const columns: ColumnDef<Course>[] = [
     {
@@ -55,6 +57,18 @@ export const columns: ColumnDef<Course>[] = [
                 </Button>
             )
         },
+        cell: ({ row }) => {
+            const isPublished = row.getValue("isPublished") || false;
+
+            return (
+                <Badge className={cn(
+                    "bg-slate-500",
+                    isPublished && "bg-sky-700"
+                )}>
+                    {isPublished ? "Published" : "Draft"}
+                </Badge>
+            )
+        }
     },
     {
         id: "actions",
@@ -66,7 +80,7 @@ export const columns: ColumnDef<Course>[] = [
                     <DropdownMenuTrigger asChild>
                         <Button variant="ghost" className="h-4 w-8 p-0">
                             <span className="sr-only">Open menu</span>
-                            <MoreHorizontal className="h-4 w-4 ml-2" />
+                            <MoreHorizontal className="h-4 w-4" />
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
