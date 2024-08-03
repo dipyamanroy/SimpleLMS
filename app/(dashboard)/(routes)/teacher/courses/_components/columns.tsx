@@ -13,7 +13,7 @@ export const columns: ColumnDef<Course>[] = [
         header: "Price",
     },
     {
-        accessorKey: "amount",
-        header: "Amount",
+        accessorKey: "isPublished",
+        header: "Published",
     },
 ]
