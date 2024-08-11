@@ -4,9 +4,11 @@ import * as React from "react"
 
 import {
 	ColumnDef,
+	ColumnFiltersState,
 	SortingState,
 	flexRender,
 	getCoreRowModel,
+	getFilteredRowModel,
 	getPaginationRowModel,
 	getSortedRowModel,
 	useReactTable,
@@ -22,6 +24,9 @@ import {
 } from "@/components/ui/table"
 
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import Link from "next/link"
+import { PlusCircle } from "lucide-react"
 
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[]
@@ -33,6 +38,7 @@ export function DataTable<TData, TValue>({
 	data,
 }: DataTableProps<TData, TValue>) {
 	const [sorting, setSorting] = React.useState<SortingState>([])
+	const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
 
 	const table = useReactTable({
 		data,
@@ -41,13 +47,32 @@ export function DataTable<TData, TValue>({
 		getPaginationRowModel: getPaginationRowModel(),
 		onSortingChange: setSorting,
 		getSortedRowModel: getSortedRowModel(),
+		onColumnFiltersChange: setColumnFilters,
+		getFilteredRowModel: getFilteredRowModel(),
 		state: {
 			sorting,
+			columnFilters,
 		},
 	})
 
 	return (
 		<div>
+			<div className="flex items-center py-4 justify-between">
+				<Input
+					placeholder="Filter courses..."
+					value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
+					onChange={(event) =>
+					table.getColumn("title")?.setFilterValue(event.target.value)
+					}
+					className="max-w-sm"
+				/>
+				<Link href="/teacher/create">
+					<Button>
+						<PlusCircle className="h-4 w-4 mr-2"/>
+						New course
+					</Button>
+				</Link>
+			</div>
 			<div className="rounded-md border">
 				<Table>
 					<TableHeader>
