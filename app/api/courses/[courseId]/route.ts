@@ -15,7 +15,6 @@ export async function DELETE(
 ) {
     try {
         const { userId } = auth();
-        const { courseId } = params;
 
         if (!userId) {
             return new NextResponse("Unauthorized", {status: 401});
@@ -36,12 +35,17 @@ export async function DELETE(
         });
 
         if (!course) {
-            return new NextResponse("Not found", {status: 401});
+            return new NextResponse("Not found", {status: 404});
         }
 
         for (const chapter of course.chapters) {
             if (chapter.muxData?.assetId) {
-                await video.assets.delete(chapter.muxData.assetId);
+                console.log(`Deleting Mux asset: ${chapter.muxData.assetId}`);
+                try {
+                    await video.assets.delete(chapter.muxData.assetId);
+                } catch (muxError) {
+                    console.error(`Error deleting Mux asset ${chapter.muxData.assetId}:`, muxError);
+                }
             }
         }
 
@@ -54,37 +58,7 @@ export async function DELETE(
         return NextResponse.json(deletedCourse);
 
     } catch (error) {
-        console.log("[COURSE_ID_DELETE]", error);
-        return new NextResponse("Internal Error", {status: 500});
-    }
-}
-
-export async function PATCH(
-    req: Request,
-    { params }: { params: { courseId: string }}
-) {
-    try {
-        const { userId } = auth();
-        const { courseId } = params;
-        const values = await req.json();
-
-        if (!userId) {
-            return new NextResponse("Unauthorized", {status: 401});
-        }
-
-        const course = await db.course.update({
-            where: {
-                id: courseId,
-                userId
-            },
-            data: {
-                ...values,
-            }
-        });
-
-        return NextResponse.json(course);
-    } catch (error) {
-        console.log("[COURSE_ID]", error);
+        console.error("[COURSE_ID_DELETE]", error);
         return new NextResponse("Internal Error", {status: 500});
     }
 }
