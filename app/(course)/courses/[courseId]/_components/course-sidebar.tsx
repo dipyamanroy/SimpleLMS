@@ -3,6 +3,7 @@ import { Chapter, Course, UserProgress } from "@prisma/client"
 import { redirect } from "next/navigation";
 
 import { db } from "@/lib/db";
+import { CourseSidebarItem } from "./course-sidebar-item";
 
 interface CourseSidebarProps{
     course: Course & {
@@ -42,7 +43,7 @@ export const CourseSidebar = async ({
             </div>
             <div className="flex flex-col w-full">
                 {course.chapters.map((chapter) => (
-                    <CourseSidebarItem 
+                    <CourseSidebarItem
                         key={chapter.id}
                         id={chapter.id}
                         label={chapter.title}
