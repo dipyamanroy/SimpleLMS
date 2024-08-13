@@ -49,6 +49,28 @@ export const getCourses = async ({
                 createdAt: "desc",
             },
         });
+
+        const coursesWithProgress: CourseWithProgressWithCategory[] = await 
+        Promise.all(
+            courses.map(async (course) => {
+                const progress = await getProgress(userId, course.id);
+                if (course.purchases.length === 0) {
+                    return {
+                        ...course,
+                        progress: null,
+                    }
+                }
+
+                const progressPercentage = await getProgress(userId, course.id);
+
+                return {
+                    ...course,
+                    progress: progressPercentage,
+                };
+            }) 
+        );
+
+        return coursesWithProgress;
     } catch (error) {
         console.log("[GET_COURSES]", error);
         return [];
