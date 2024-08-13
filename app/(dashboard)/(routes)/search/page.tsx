@@ -6,6 +6,7 @@ import { db } from "@/lib/db";
 import { Categories } from "./_components/categories";
 import { SearchInput } from "@/components/search-input";
 import { getCourses } from "@/actions/get-courses";
+import { CoursesList } from "@/components/courses-list";
 
 interface SearchPageProps {
     searchParams: {
@@ -42,6 +43,9 @@ const SearchPage = async ({
             <div className="p-6">
                 <Categories 
                     items = {categories}
+                />
+                <CoursesList 
+                    items = {courses}
                 />
             </div>
         </>
