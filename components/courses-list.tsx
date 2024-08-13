@@ -1,9 +1,25 @@
 import { Category, Course } from "@prisma/client";
 
-export const CoursesList = () => {
+type CourseWithProgressWithCategory = Course & {
+    category: Category | null;
+    chapters: { id: string }[];
+    progress: number | null;
+}
+
+interface CoursesListProps {
+    items: CourseWithProgressWithCategory[];
+}
+
+export const CoursesList = ({
+    items,
+}: CoursesListProps) => {
     return ( 
         <div>
-            Course list
+            {items.map((item) => (
+                <div key={item.id}>
+                    {item.title}
+                </div>
+            ))}
         </div>
     );
 };
