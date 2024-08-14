@@ -85,6 +85,16 @@ export const getChapter = async ({
             }
         })
 
+        return {
+            chapter,
+            course,
+            muxData,
+            attachments,
+            nextChapter,
+            userProgress,
+            purchase,
+        };
+
     } catch (error) {
         console.log("[GET_CHAPTER]", error);
         return {
