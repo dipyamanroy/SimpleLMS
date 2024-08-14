@@ -26,7 +26,14 @@ const ChapterIdPage = async ({
         userId,
         chapterId: params.chapterId,
         courseId: params.courseId,
-    })
+    });
+
+    if (!chapter || !course) {
+        return redirect("/");
+    }
+
+    const isLocked = !chapter.isFree && !purchase;
+    const completeOnEnd  = !!purchase && !userProgress?.isCompleted;
 
     return ( 
         <div>
