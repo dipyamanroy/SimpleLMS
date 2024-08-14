@@ -1,6 +1,8 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
+import { getChapter } from "@/actions/get-chapter";
+
 const ChapterIdPage = async ({
     params
 }: {
@@ -12,7 +14,20 @@ const ChapterIdPage = async ({
         return redirect("/");
     }
 
-    
+    const {
+        chapter,
+        course,
+        muxData,
+        attachments,
+        nextChapter,
+        userProgress,
+        purchase,
+    } = await getChapter({
+        userId,
+        chapterId: params.chapterId,
+        courseId: params.courseId,
+    })
+
     return ( 
         <div>
             Chapter Id!
