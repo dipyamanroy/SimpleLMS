@@ -64,6 +64,21 @@ const ChapterIdPage = async ({
                         completeOnEnd={completeOnEnd}
                     />
                 </div>
+                <div className="p-4 flex flex-col md:flex-row items-center justify-between">
+                    <h2 className="text-2xl font-semibold mb-2">
+                        {chapter.title}
+                    </h2>
+                    {purchase ? (
+                        <div>
+                            {/*Todo: Add course progress button */}
+                        </div>
+                    ): (
+                        <CourseEnrollButton
+                            courseId={params.courseId}
+                            price={course.price!}
+                        />
+                    )}
+                </div>
             </div>
         </div>
     );
