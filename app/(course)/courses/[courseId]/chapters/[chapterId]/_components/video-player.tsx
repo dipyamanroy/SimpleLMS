@@ -55,6 +55,7 @@ export const VideoPlayer = ({
                     onCanPlay={() => setIsReady(true)}
                     onEnded={() => {}}
                     autoPlay
+                    playbackId={playbackId}
                 />
             )}
         </div>
