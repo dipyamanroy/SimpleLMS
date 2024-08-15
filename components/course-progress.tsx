@@ -26,6 +26,7 @@ export const CourseProgress = ({
             <Progress 
                 className="h-2"
                 value={value} 
+                variant={variant} 
             />
         </div>
     )
