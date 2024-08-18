@@ -18,3 +18,16 @@ const groupByCourse = (purchases: PurchaseWithCourse[]) => {
 
     return grouped;
 }
+
+export const getAnalytics = async (userId: string) => {
+    try {
+
+    } catch (error) {
+        console.log("[GET_ANALYTICS]", error);
+        return {
+            data: [],
+            totalRevenue: 0,
+            totalSales: 0,  
+        };
+    }
+}
