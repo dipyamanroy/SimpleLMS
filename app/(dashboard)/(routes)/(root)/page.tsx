@@ -1,6 +1,20 @@
-import { UserButton } from "@clerk/nextjs"
+import { auth } from "@clerk/nextjs/server"
+import { redirect } from "next/navigation";
 
-export default function Dashboard() {
+import { getDashboardCourses } from "@/actions/get-dashboard-courses";
+
+export default async function Dashboard() {
+    const userId = auth();
+
+    if(!userId) {
+        return redirect("/");
+    }
+
+    const {
+        completedCourses,
+        coursesInProgress,
+    } = await getDashboardCourses(userId);
+
     return (
         <div>
             
