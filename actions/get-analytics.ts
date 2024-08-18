@@ -21,6 +21,16 @@ const groupByCourse = (purchases: PurchaseWithCourse[]) => {
 
 export const getAnalytics = async (userId: string) => {
     try {
+        const purchase = await db.purchase.findMany({
+            where: {
+                course: {
+                    userId: userId,
+                }
+            },
+            include: {
+                course: true,
+            },
+        });
 
     } catch (error) {
         console.log("[GET_ANALYTICS]", error);
