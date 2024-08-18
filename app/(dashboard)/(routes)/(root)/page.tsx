@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { getDashboardCourses } from "@/actions/get-dashboard-courses";
 
 export default async function Dashboard() {
-    const userId = auth();
+    const { userId } = auth();
 
     if(!userId) {
         return redirect("/");
