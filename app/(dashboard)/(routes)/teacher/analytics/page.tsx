@@ -17,9 +17,7 @@ const AnalyticsPage = async () => {
     } = await getAnalytics(userId);
     
     return ( 
-        <div>
-            Analytics page!
-        </div>
+        
     );
 }
 
