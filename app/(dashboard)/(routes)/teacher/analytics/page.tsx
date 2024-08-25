@@ -30,6 +30,7 @@ const AnalyticsPage = async () => {
                     value={totalSales}
                 />
             </div>
+            <Chart />
         </div>
     );
 }
