@@ -2,6 +2,7 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
 import  { getAnalytics } from "@/actions/get-analytics"
+import { DataCard } from "./_components/data-card";
 
 const AnalyticsPage = async () => {
     const { userId } = auth();
@@ -17,17 +18,10 @@ const AnalyticsPage = async () => {
     } = await getAnalytics(userId);
     
     return ( 
-        <div>
-            <h1>Analytics Page</h1>
-            <p>Total Revenue: ${totalRevenue}</p>
-            <p>Total Sales: {totalSales}</p>
-            {data.map((item) => (
-                <div key={item.id}>
-                    <h2>{item.name}</h2>
-                    <p>Revenue: ${item.revenue}</p>
-                    <p>Sales: {item.sales}</p>
-                </div>
-            ))};
+        <div className="p-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <DataCard />
+            </div>
         </div>
     );
 }
